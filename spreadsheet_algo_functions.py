@@ -21,19 +21,23 @@ def create_spreadsheet(name, dir_path, dir_list):
     # variable to keep track of the column number on the spreadsheet
     col = 0
     for dir in dir_list:
-        # writing 
         row = 0
         # writing directory-name, date, and difficulty as section headers
         worksheet.write(row, col, dir, cell_format)
-        worksheet.write(row, col + 1, "Date", cell_format)
-        worksheet.write(row, col + 2, "Difficulty", cell_format)
-        # getting the directories contents, then writing them
+        worksheet.write(row, col+1, "Date", cell_format)
+        worksheet.write(row, col+2, "Difficulty", cell_format)
+
+        # widen the length of the columns
+        worksheet.set_column(col, col, 30)
+        worksheet.set_column(col+1, col+1, 20)
+        worksheet.set_column(col+2, col+2, 30)
+
+        # getting the directories contents, then writing them to the sheet
         contents = os.listdir(op.join(dir_path, dir))
         contents.sort()
         for content in contents:
             row += 1
             worksheet.write(row, col, content)
-
         # iterating the column number by 3 to start the section for the next sub-directory
         col += 3
            
