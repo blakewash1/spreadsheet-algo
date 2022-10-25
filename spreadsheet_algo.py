@@ -8,16 +8,24 @@
 #  CONTENT_1 |      |            | CONTENT_1  |      |            |
 #  CONTENT_2 |      |            | CONTENT_2  |      |            |
 #     ...    |      |            |    ...     |      |            |
+# 
+# This script was written with python version 3.9 in mind
 
-import os, spreadsheet_algo_functions as saf
+import os, spreadsheet_algo_functions as saf, time
 
 # get name of folder from user input
-folder_name = input("Enter folder name: ")
+user_folder = input("Enter folder name: ")
 
 # check if folder exists in current directory
 dir_path = os.path.dirname(os.path.realpath(__file__))
 top_dir_list = os.listdir(dir_path)
-saf.find_dir(top_dir_list, "test-folder")
+if saf.find_dir(top_dir_list, user_folder):
+    print("Folder found. Generating spreadsheet...")
+else:
+    print("Folder not found") 
+
+# add a short delay
+time.sleep(1)
 # for item in os.listdir(dir_path):
 #     print(item)
 #     print(os.path.isfile(item))
