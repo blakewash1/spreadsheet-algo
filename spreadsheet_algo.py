@@ -21,12 +21,20 @@ dir_path = op.dirname(op.realpath(__file__))
 top_dir_list = os.listdir(dir_path)
 if saf.find_dir(top_dir_list, user_folder):
     # append user folder to dir_path variable
-    dir_path += "\\" + user_folder
+    dir_path = op.join(dir_path, user_folder)
     # create a list of the sub-directories wihin the user folder
     sub_dir_list = [f for f in os.listdir(dir_path) if not op.isfile(f)]
     # check to see if list has content. If not, exit program
     if sub_dir_list:
         print("Folder found. Generating spreadsheet...")
+        sub_dir_list.sort()
+        # iterate through list of sub-directories and its file contents
+        for dir in sub_dir_list:
+            print("\n" + dir)
+            contents = os.listdir(op.join(dir_path, dir))
+            contents.sort()
+            for content in contents:
+             print(content)
     else:
         print("There are no sub-folders within selected folder. Exiting...")
     
