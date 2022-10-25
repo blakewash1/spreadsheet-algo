@@ -8,3 +8,18 @@
 #  CONTENT_1 |      |            | CONTENT_1  |      |            |
 #  CONTENT_2 |      |            | CONTENT_2  |      |            |
 #     ...    |      |            |    ...     |      |            |
+
+import os
+
+# get name of folder from user input
+folder_name = input("Enter folder name: ")
+
+# check if folder exists in current directory
+dir_path = os.path.dirname(os.path.realpath(__file__))
+top_dir_list = os.listdir(dir_path)
+for item in os.listdir(dir_path):
+     print(item)
+
+# for root, dirs, files in next(os.walk(dir_path))[1]:
+#     for dir in dirs:
+#         print(dir)
