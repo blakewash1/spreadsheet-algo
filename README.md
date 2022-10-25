@@ -14,4 +14,4 @@ The following is a visual of how the spreadsheet should look:
 ## Requirements
 * python version 3.6
 * pip install xlsxwriter
-* user's folder should exist in same directory as this project
+* user's folder should exist inside of the "put_folder_here" directory
