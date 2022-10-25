@@ -1,4 +1,4 @@
-import os, os.path as op, spreadsheet_algo_functions as saf, time, xlsxwriter
+import os, os.path as op, spreadsheet_algo_functions as saf, time
 
 # get name of folder from user input
 user_folder = input("Enter folder name: ")
@@ -17,16 +17,10 @@ if saf.find_dir(top_dir_list, user_folder):
     # check to see if list has content. If not, exit program
     if sub_dir_list:
         print("Folder found. Generating spreadsheet...")
-
-        # create spreadsheet using xlsxwriter
-        workbook = xlsxwriter.Workbook(user_folder +'.xlsx')
         
         sub_dir_list.sort()
-
-        # iterate through list of sub-directories and its file contents
-        for dir in sub_dir_list:
-            saf.list_contents(dir_path, dir)
-
+        saf.create_spreadsheet(user_folder, dir_path, sub_dir_list)
+    
     else:
         print("There are no sub-folders within selected folder. Exiting...")
     
