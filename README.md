@@ -14,4 +14,5 @@ The following is a visual of how the spreadsheet should look:
 ## Requirements
 * python version 3.6
 * pip install xlsxwriter
+* pip install tqdm
 * user's folder should exist inside of the "put_folder_here" directory

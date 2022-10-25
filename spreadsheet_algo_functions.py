@@ -12,7 +12,6 @@ def find_dir(dir, name):
 def create_spreadsheet(name, dir_path, dir_list):
     # create spreadsheet using xlsxwriter
     xlsx_path = op.join(os.getcwd(), "find_spreadsheet_here", name +'.xlsx')
-    print(xlsx_path)
     workbook = xlsxwriter.Workbook(xlsx_path)
     worksheet = workbook.add_worksheet()
     cell_format = workbook.add_format()

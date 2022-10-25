@@ -1,4 +1,5 @@
 import os, os.path as op, spreadsheet_algo_functions as saf, time
+from tqdm import tqdm
 
 # get name of folder from user input
 user_folder = input("Enter folder name: ")
@@ -16,10 +17,15 @@ if saf.find_dir(top_dir_list, user_folder):
 
     # check to see if list has content. If not, exit program
     if sub_dir_list:
-        print("Folder found. Generating spreadsheet...")
+        print("Folder found.")
+        time.sleep(1.5)
         
         sub_dir_list.sort()
         saf.create_spreadsheet(user_folder, dir_path, sub_dir_list)
+
+        for i in tqdm(range(10), desc ="Generating Spreadsheet"):
+            time.sleep(.1)
+        print("Spreadsheet created.")
     
     else:
         print("There are no sub-folders within selected folder. Exiting...")
