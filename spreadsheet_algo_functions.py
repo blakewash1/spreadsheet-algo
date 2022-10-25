@@ -7,3 +7,11 @@ def find_dir(dir, name):
         if not os.path.isfile(item) and item.casefold() == name.casefold():
             return True
     return False
+
+# for listing out the contents of the sub-directory in alpha-numeric order
+def list_contents(dir_path, dir):
+    print("\n" + dir)
+    contents = os.listdir(op.join(dir_path, dir))
+    contents.sort()
+    for content in contents:
+        print(content)
