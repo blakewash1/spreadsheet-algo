@@ -14,30 +14,26 @@ def create_spreadsheet(name, dir_path, dir_list):
     xlsx_path = op.join(os.getcwd(), "find_spreadsheet_here", name +'.xlsx')
     workbook = xlsxwriter.Workbook(xlsx_path)
     worksheet = workbook.add_worksheet()
-    cell_format = workbook.add_format()
-    cell_format.set_bold()
+    cell_format = workbook.add_format({'bold': True, 'bg_color': '#FAFAD2'})
 
-    # variable to keep track of the column number on the spreadsheet
-    col = 0
+    # widen the length of the first column
+    worksheet.set_column(0, 0, 50)
+    
+    # variable for keeping track of row num as we go down the spreadsheet
+    row = 0
     for dir in dir_list:
-        row = 0
         # writing directory-name, date, and difficulty as section headers
-        worksheet.write(row, col, dir, cell_format)
-        worksheet.write(row, col+1, "Date", cell_format)
-        worksheet.write(row, col+2, "Difficulty", cell_format)
-
-        # widen the length of the columns
-        worksheet.set_column(col, col, 30)
-        worksheet.set_column(col+1, col+1, 20)
-        worksheet.set_column(col+2, col+2, 30)
+        worksheet.write(row, 0, dir, cell_format)
+        worksheet.write(row, 1, "Date", cell_format)
+        worksheet.write(row, 2, "Difficulty", cell_format)
 
         # getting the directories contents, then writing them to the sheet
         contents = os.listdir(op.join(dir_path, dir))
         contents.sort()
         for content in contents:
             row += 1
-            worksheet.write(row, col, content)
-        # iterating the column number by 3 to start the section for the next sub-directory
-        col += 3
+            worksheet.write(row, 0, content)
+        # iterating the row number by 2 to create space for the next section
+        row += 2
            
     workbook.close()
