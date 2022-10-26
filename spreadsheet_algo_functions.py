@@ -16,8 +16,9 @@ def create_spreadsheet(name, dir_path, dir_list):
     worksheet = workbook.add_worksheet()
     cell_format = workbook.add_format({'bold': True, 'bg_color': '#FAFAD2'})
 
-    # widen the length of the first column
-    worksheet.set_column(0, 0, 50)
+    # widen the length of the first and third column
+    worksheet.set_column(0, 0, 60)
+    worksheet.set_column(2, 2, 30)
     
     # variable for keeping track of row num as we go down the spreadsheet
     row = 0
@@ -25,7 +26,7 @@ def create_spreadsheet(name, dir_path, dir_list):
         # writing directory-name, date, and difficulty as section headers
         worksheet.write(row, 0, dir, cell_format)
         worksheet.write(row, 1, "Date", cell_format)
-        worksheet.write(row, 2, "Difficulty", cell_format)
+        worksheet.write(row, 2, "Understanding", cell_format)
 
         # getting the directories contents, then writing them to the sheet
         contents = os.listdir(op.join(dir_path, dir))
