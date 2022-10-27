@@ -1,4 +1,5 @@
 import os, os.path as op, spreadsheet_algo_functions as saf, time
+from tqdm import tqdm
 
 # get name of webpage source from user input
 user_folder = input("Enter name of webpage source (html): ")

@@ -22,7 +22,7 @@ def find_item_in_dir(dir_list, name, is_file):
 def create_spreadsheet(name, dict):
     # creating progress bar
     increment = 100 / len(dict)
-    progress_bar = tqdm(total=100, desc="Generating Spreadsheet", colour="green")
+    progress_bar = tqdm(total=100, desc="Generating Spreadsheet", colour="green", ncols=150)
 
     # create spreadsheet using xlsxwriter
     xlsx_path = op.join(os.getcwd(), "find_spreadsheet_here", name +'.xlsx')
@@ -46,7 +46,7 @@ def create_spreadsheet(name, dict):
         for content in content_list:
             row += 1
             worksheet.write(row, 0, content)
-            # progressing the progress bar
+            # updating the progress bar
             time.sleep(0.025)
             progress_bar.update(increment / len(content_list))
 

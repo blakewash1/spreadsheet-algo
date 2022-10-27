@@ -1,4 +1,5 @@
 import os, os.path as op, spreadsheet_algo_functions as saf, time
+from tqdm import tqdm
 
 # get name of folder from user input
 user_folder = input("Enter folder name: ")
@@ -19,6 +20,10 @@ if saf.find_item_in_dir(top_dir_list, user_folder, False):
     if sub_dir_list:
         print("Folder found.")
         time.sleep(1.5)
+
+        # creating progress bar
+        increment = 100 / len(sub_dir_list)
+        progress_bar = tqdm(total=100, desc="Parsing folders", colour="blue", ncols=150)
         
         # create dictionary for create_spreadsheet() function
         folder_dict = {}
@@ -29,7 +34,11 @@ if saf.find_item_in_dir(top_dir_list, user_folder, False):
             contents.sort()
             # add folder-name/contents pair to dictionary
             folder_dict[dir] = contents
+            # updating the progress bar
+            time.sleep(0.1)
+            progress_bar.update(increment)
 
+        progress_bar.close()
         saf.create_spreadsheet(user_folder, folder_dict)
     
     else:
