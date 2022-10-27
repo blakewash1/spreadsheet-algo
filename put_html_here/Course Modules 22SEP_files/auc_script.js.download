@@ -1,0 +1,391 @@
+// JavaScript Document
+$(window).load(function () {
+	/*$('body').on('click', '.intro-card', function () {
+		window.open($(this).attr('data-target-url'), $(this).attr('data-target-location'));
+		return false;
+	});*/
+	$('body').on('click', '.resource-general', function () {
+		window.open($(this).attr('data-target-url'), $(this).attr('data-target-location'));
+		return false;
+	});
+	$('body').on('click', '.resource-program', function () {
+		window.open($(this).attr('data-target-url'), $(this).attr('data-target-location'));
+		return false;
+	});
+	$('body').on('click', '.resource-card', function () {
+		window.open($(this).attr('data-target-url'), $(this).attr('data-target-location'));
+		return false;
+	});
+	$('body').on('click', '.resource-action', function () {
+		window.open($(this).attr('data-target-url'), $(this).attr('data-target-location'));
+		return false;
+	});
+	$('body').on('mouseenter', '.tile-image', function () {
+		$(this).children('.tile-title').addClass('tile-hover');
+	});
+	$('body').on('mouseleave', '.tile-image', function () {
+		$(this).children('.tile-title').removeClass('tile-hover');
+	});
+	$('body').on('click', '.tile-image', function () {
+		window.open($(this).attr('data-target-url'), $(this).attr('data-target-location'));
+		return false;
+	});
+	$('body').on('click', '.accordion.ui-accordion--mini h3 a', function () {	
+		$(this).parent().siblings().removeClass('active_item');
+		$(this).parent().addClass('active_item');
+		return false;
+	});
+	$('body').on('click', '.accordion.ui-accordion h3 a', function () {	
+		$(this).parent().siblings().removeClass('active_item');
+		$(this).parent().addClass('active_item');
+		return false;
+	});
+	$('.course__tile--custom').each(function () {
+		if (typeof $(this).data('img-src') !== 'undefined') {
+			var bgImgSrc = $(this).data('img-src');
+			$(this).css('background-image', 'url("' + bgImgSrc + '")');
+		}
+	});
+
+	$('.image-view-toggle').click(function () {
+		if (!$(this).hasClass('image-view-toggle-active')) {
+			$('.list-view-toggle').removeClass('list-view-toggle-active');
+			$(this).addClass('image-view-toggle-active');
+			$('.resource-container').removeClass('list-view-enabled');
+			$('.resource-container .resource-program').addClass('resource-general');
+			$('.resource-container .resource-general').removeClass('resource-program');
+			$('.resource-container .resource-inner').addClass('resource-content');
+			$('.resource-container .resource-content').removeClass('resource-inner');
+			return false;
+		}
+	});
+	$('.list-view-toggle').click(function () {
+		if (!$(this).hasClass('list-view-toggle-active')) {
+			$('.image-view-toggle').removeClass('image-view-toggle-active');
+			$(this).addClass('list-view-toggle-active');
+			$('.resource-container').addClass('list-view-enabled');
+			$('.resource-container .resource-general').addClass('resource-program');
+			$('.resource-container .resource-program').removeClass('resource-general');
+			$('.resource-container .resource-content').addClass('resource-inner');
+			$('.resource-container .resource-inner').removeClass('resource-content');
+			return false;
+		}
+	});
+
+	$('#wrapper .cirt_container .dd-button').click(function () {
+		$(this).toggleClass('collapsed');
+	});
+	var btt = $('<div id="btt" title="Back to Top"><a href=#">Top</a></div>').appendTo($('.course-menu-expanded #wrapper #main'));
+	$('#btt').hide();
+	var dataEntryID;
+	var attr;
+	var playerID = 'kaltura_player_1423858891';
+	var playButton;
+	$('.button-50 a').each(function () {
+		attr = $(this).attr('data-entryId');
+		if ($(this).parent().hasClass('play-button')) {
+			if (typeof attr == typeof undefined || attr == false || typeof attr == '') {
+				$(this).parent().addClass('blank-button');
+				$(this).bind('click', function (e) {
+					e.preventDefault();
+				});
+				$('.blank-button').removeClass('play-button');
+			}
+		}
+		if ($(this).parent().hasClass('quick-guide-button')) {
+			if ($(this).attr('href') == '') {
+				$(this).parent().addClass('blank-button');
+				$(this).bind('click', function (e) {
+					e.preventDefault();
+				});
+				$('.blank-button').removeClass('quick-guide-button');
+			}
+		}
+	});
+	$('body').on('click', '.play-button a', function () {
+		$('.button-50').siblings('.faculty-learning-content').children('div.kaltura-video').remove();
+		$('.button-50.description-button').addClass('play-button');
+		$('.button-50.play-button').removeClass('description-button');
+		$('.play-button span').text('Play Video');
+		$('.button-50').siblings('.faculty-learning-content').children('p.description').css('display', 'block');
+		$(this).parent('.button-50').addClass('description-button');
+		$(this).parent('.button-50').removeClass('play-button');
+		$(this).parent('.button-50').siblings('.faculty-learning-content').children('p.description').css('display', 'none');
+		$(this).parent('.button-50').siblings('.faculty-learning-content').append('<div class="allow-inline-style kaltura-video" id="kaltura_player_1423858891" style="width: 560px; height: 395px;" itemprop="video" itemscope itemtype="http://schema.org/VideoObject"></div>');
+		dataEntryID = $(this).attr('data-entryId');
+		kWidget.embed({
+			"targetId": playerID,
+			"wid": "_1432812",
+			"uiconf_id": 27266491,
+			"flashvars": {},
+			"cache_st": 1423858892,
+			"entry_id": dataEntryID
+		});
+		$(this).children('span').text('Show Description');
+	});
+	$('body').on('click', '.description-button a', function () {
+		$(this).parent('.button-50').addClass('play-button');
+		$(this).parent('.button-50').removeClass('description-button');
+		$(this).parent('.button-50').siblings('.faculty-learning-content').children('p.description').css('display', 'block');
+		$(this).parent('.button-50').siblings('.faculty-learning-content').children('div.kaltura-video').remove();
+		$(this).children('span').text('Play Video');
+	});
+});
+
+$(window).scroll(function () {
+	if ($(document).scrollTop() > 10) {
+		$("#btt").stop(true, true).fadeIn(300);
+	} else {
+		$("#btt").fadeOut(300);
+	}
+	$("#btt, #btt a").click(function () {
+		$("html, body").stop(true, true).animate({
+			scrollTop: "0px"
+		}, 1000);
+		return false;
+	});
+	if (!CanvasDetails.location.hasOwnProperty('edit')) {
+		/*This will change the lecture subtitle to the section that is at the top of the viewport as it scrolls*/
+		$(".toc .section").not(".to-delete").not("cw-hidden-section").each(function () {
+			var vpH = $(window).height(), // Viewport Height
+				st = $(window).scrollTop(), // Scroll Top
+				y = $(this).offset().top,
+				elementHeight = $(this).height();
+
+			if ((y < (vpH + st)) && (y > (st - elementHeight + 80))) {
+				$('#header h1').html('<a href="#">' + pageHeader + '</a><span> &gt; ' + $(this).find('h2').first().text() + '</span>');
+				return false;
+			}
+		});
+	}
+});
+if (CanvasDetails && CanvasDetails.location && CanvasDetails.location.hasOwnProperty('pages')) {
+	onElementRendered('.user_content .section', function (elem) {
+		renderTOC(elem);
+	});
+}
+
+function renderTOC(elem) {
+	$("[id=toc-nav]").remove();
+	if (elem.length > 1) {
+		var tocnav = $('<div id="toc-nav"></div>');
+		var title = $(".page-title, .ic-Action-header__Primary")
+		tocnav.insertAfter(title);
+		tocnav.html('<a href="#" class="btn btn-primary">Table of Contents</a>');
+		tocnav.append('<ul id="section-list"></ul>');
+		tocnav.children("a").attr("tabindex", "1").click(function (e) {
+			e.preventDefault();
+			tocnav.toggleClass('toc-expanded');
+			tocnav.attr("aria-expanded", "true").attr("aria-hidden", "false").focus();
+		}).keyup(function (event) {
+			if (event.keyCode == 13) {
+				$(this).click();
+				$(this).find("li a").first().focus();
+			}
+		});
+		elem.each(function (i) {
+			$(this).attr('id', 'nav-sec-' + i);
+			var tocItem = $(this).find('h2').first().html();
+			var jumpLink = 'nav-sec-' + i + '-link';
+			$(this).find('h2').attr('id', 'nav-sec-' + i + '-link');
+			$('#section-list').append('<li><a href="#' + jumpLink + '">' + tocItem + '</a></li>');
+		});
+		tocnav.find('#section-list li a').attr('tabindex', '-1').click(function (event) {
+			/*console.log('offset ')
+			window.scrollTo(0, $($(this).attr("href")).offset().top - 60);
+			$($(this).attr('href')).focus();
+			event.preventDefault();
+			event.stopPropagation();*/
+			tocnav.removeClass('toc-expanded');
+			if (tocnav.attr('class') !== 'expanded') {
+				tocnav.attr('aria-expanded', 'false');
+				tocnav.attr('aria-hidden', 'true');
+				tocnav.attr('tabindex', '');
+			} else {
+				tocnav.attr('aria-expanded', 'true');
+				tocnav.attr('aria-hidden', 'false');
+				tocnav.attr('tabindex', '-1');
+			}
+		});
+		$(window).scroll(function () {
+			var left = $(".user_content").offset().left + "px";
+			if (title.offset().top + title.height() - $(window).scrollTop() < 0) {
+				tocnav.css({
+					position: "fixed",
+					top: 0,
+					left: left
+				});
+				title.css("margin-bottom","53px");
+
+			} else {
+				title.removeAttr("style");
+				tocnav.removeAttr("style");
+			}
+		});
+	}
+}
+
+
+function reactTray(trayLinks, slide_out_title, global_nav_name, footerContent) {
+
+	//Browser Detection
+	navigator.agentDetect = (function () {
+		var ua = navigator.userAgent,
+			tem,
+			M = ua.match(/(opera|chrome|safari|firefox|msie|trident(?=\/))\/?\s*(\d+)/i) || [];
+		if (/trident/i.test(M[1])) {
+			tem = /\brv[ :]+(\d+)/g.exec(ua) || [];
+			return 'IE ' + (tem[1] || '');
+		}
+		if (M[1] === 'Chrome') {
+			tem = ua.match(/\b(OPR|Edge)\/(\d+)/);
+			if (tem != null)
+				return tem.slice(1).join(' ').replace('OPR', 'Opera');
+		}
+		M = M[2] ? [M[1], M[2]] : [navigator.appName, navigator.appVersion, '-?'];
+		if ((tem = ua.match(/version\/(\d+)/i)) != null)
+			M.splice(1, 1, tem[1]);
+		return M;
+	})();
+
+	//Array, 0 = browser, 1 = version
+	var agent = navigator.agentDetect;
+	var reactId;
+
+	switch (agent[0]) {
+		case "Firefox":
+			reactId = "2";
+			break;
+		case "Safari":
+			reactId = "2";
+			break;
+		default:
+			reactId = "1";
+			break;
+	}
+
+	var displayVals = '';
+
+	function displayLinks(element, index, array) {
+		displayVals += '<li class="ic-NavMenu-list-item">';
+		displayVals += '<a class="ic-NavMenu-list-item__link ' + element.val.toLowerCase().replace(/\s/g, '-') + '" href="' + element.key + '">' + element.val + '</a>'; //Remove target="_blank" if you do not want the links to open in a new tab.
+		displayVals += '</li>';
+	}
+
+	trayLinks.forEach(displayLinks);
+
+	var trayHtml = '<div style="position:absolute;background:#fff;" class="ReactTray__Content ReactTray__Content--after-open" style="position:absolute;background:#fff;" tabindex="-1" data-reactid=".' +
+		reactId + '.0"><div class="ic-NavMenu__layout" data-reactid=".' +
+		reactId + '.0.0"><div class="ic-NavMenu__primary-content" data-reactid=".' +
+		reactId + '.0.0.0"><div class="ic-NavMenu__header" data-reactid=".' +
+		reactId + '.0.0.0.0"><h1 class="ic-NavMenu__headline"" data-reactid=".' +
+		reactId + '.0.0.0.0.0">' +
+		slide_out_title + '</h1><button class="Button Button--icon-action ReactTray__closeBtn ic-NavMenu__closeButton" type="button" data-reactid=".' +
+		reactId + '.0.0.0.0.1"><i class="icon-x" data-reactid=".' +
+		reactId + '.0.0.0.0.1.0"></i><span class="screenreader-only" data-reactid=".' +
+		reactId + '.0.0.0.0.1.1">Close</span></button></div><h5>Course Issue Reporting Tool (CIRT)</h5><ul class="ic-NavMenu__link-list" data-reactid=".' +
+		reactId + '.0.0.0.1">' +
+		displayVals + '</ul></div><hr><div class="ic-NavMenu__secondary-content" data-reactid=".' +
+		reactId + '.0.0.1"><div class="ReactTray__info-box" data-reactid=".' +
+		reactId + '.0.0.1.0">' +
+		footerContent + '</div></div></div></div>' +
+		'<script>$(\'.Button.Button--icon-action.ReactTray__closeBtn, .Button.Button--icon-action.ReactTray__closeBtn .icon-x\').click(function () {			$(\'#custom_nav\').removeClass(\'ic-app-header__menu-list-item--active\');$(\'.ReactTrayPortal div\').removeAttr(\'style\');$(\'.ReactTrayPortal div\').removeAttr(\'class\');$(\'.ReactTrayPortal div\').html("");$(\'#menu, .menu-item.ic-app-header__menu-list-item a\').removeClass(\'ui-state-disabled\').removeAttr(\'disabled\');$(\'#customTrayOverlay\').hide();$(\'#custom_nav\').css(\'background-color\', \'\');$(\'.icon-resources\').css(\'color\', \'#fff\');});</script>';
+
+	trayHtml = trayHtml.replace(/(?:\r\n|\r|\n|  )/g, '');
+	if (ENV.current_user_roles.indexOf('teacher') >= 0 || ENV.current_user_roles.indexOf('admin') >= 0) {
+		var menu = $('#menu');
+		if (!menu.length)
+			return;
+		var custom_nav = $('<li/>', {
+			'id': 'custom_nav',
+			'class': 'menu-item ic-app-header__menu-list-item',
+			html: '<a id="global_nav_resources_link" href="javascript:void(0)" class="ic-app-header__menu-list-link">' +
+				'<div class="menu-item-icon-container" aria-hidden="true">' +
+				'<i class="ic-icon-svg icon-resources"></i>' +
+				'<div class="menu-item__text">' + global_nav_name + '</div>' +
+				'</div></a></li>'
+				/*});*/
+		});
+	}
+
+	menu.append(custom_nav);
+
+	$('body').append('<div id="customTrayOverlay" style="width:' + $('#menu').width() + 'px;height: ' + $('#menu').height() + 'px;position: absolute;left: 0;top: 87px;z-index: 999;display:none;"></div>');
+
+	$('#global_nav_resources_link').click(function () {
+		$('.ReactTrayPortal div').addClass('ReactTray__Overlay ReactTray__Overlay--after-open');
+		$('.ReactTrayPortal div').css({
+			'position': 'fixed',
+			'top': '0px',
+			'left': '0px',
+			'right': '0px',
+			'bottom': '0px'
+		});
+		$('div.ReactTray__Content h5').css({
+			'color': '#2D3B45 !important'
+		});
+		$('.ReactTrayPortal div').append(trayHtml);
+		$('#menu, .menu-item.ic-app-header__menu-list-item a').addClass('ui-state-disabled').attr('disabled', 'disabled');
+		$('#customTrayOverlay').show();
+		$('.ic-app-header__menu-list-item--active').removeClass('ic-app-header__menu-list-item--active');
+		$('#custom_nav').addClass('ic-app-header__menu-list-item--active');
+
+	});
+
+	var modalTitle;
+	var modalWindow;
+
+}
+
+function cirtModal(modalTitle, modalWindow) {
+	$('#cirt-Modal').remove();
+	var modalContent = '<div id="cirt-Modal" class="modal user_content"><span class="closeBTN">&times;</span><h4>' + modalTitle + '</h4><div class="modal-content">' + modalWindow + '</div></div>';
+	$('body').append(modalContent);
+	$('#cirt-Modal').css({
+		'box-sizing': 'border-box',
+		'display': 'block',
+		'position': 'fixed',
+		'top': '10%',
+		'right': '10%',
+		'bottom': '10%',
+		'left': '10%',
+		'width': '80%',
+		'height': '80%',
+		'overflow': 'hidden',
+		'background-color': '#EEE',
+		'-moz-border-radius': '8px',
+		'-webkit-border-radius': '8px',
+		'border-radius': '8px',
+		'z-index': '9999'
+
+	});
+	$('#cirt-Modal h4').css({
+		'box-sizing': 'border-box',
+		'padding': '10px 18px',
+		'border': '1px dotted #CCC'
+	});
+	$('.closeBTN').css({
+		'display': 'block',
+		'position': 'absolute',
+		'top': '1%',
+		'right': '1%',
+		'font-size': '24px',
+		'cursor': 'pointer'
+	});
+	$('.modal-content').css({
+		'box-sizing': 'border-box',
+		'padding': '15px',
+		'position': 'absolute',
+		'top': '55px',
+		'right': '0',
+		'bottom': '0',
+		'left': '0',
+		'display': '100%',
+		'margin-top': '0',
+		'overflow': 'auto'
+	});
+	$('body').on('click', '.closeBTN', function (e) {
+		$('#cirt-Modal').css('display', 'none');
+		e.preventDefault();
+	});
+}

@@ -1,4 +1,5 @@
-import os, os.path as op, xlsxwriter
+import os, os.path as op, xlsxwriter, time
+from tqdm import tqdm
 
 # for searching for a directory within a list of items. Returns false
 # if directory with desired name is not found
@@ -12,6 +13,12 @@ def find_dir(dir, name):
 # value = the list of contents. Iterates through the dictionary and prints to
 # a new spreadsheet
 def create_spreadsheet(name, dict):
+    # creating progress bar
+    increment = 100 / len(dict)
+    progress_bar = tqdm(total=100, desc="Generating Spreadsheet")
+    # for i in tqdm(range(10), desc="Generating Spreadsheet"):
+    #     time.sleep(.1)
+
     # create spreadsheet using xlsxwriter
     xlsx_path = op.join(os.getcwd(), "find_spreadsheet_here", name +'.xlsx')
     workbook = xlsxwriter.Workbook(xlsx_path)
@@ -34,9 +41,16 @@ def create_spreadsheet(name, dict):
         for content in content_list:
             row += 1
             worksheet.write(row, 0, content)
+            # progressing the progress bar
+            time.sleep(0.025)
+            progress_bar.update(increment / len(content_list))
+
         # iterating the row number by 2 to create space for the next section
         row += 2
            
+    progress_bar.close()
+    time.sleep(0.5)
+    print("Spreadsheet created.")
     workbook.close()
 
 # for writing the contents of a directory to a spreadsheet (in alpha-numeric order)
