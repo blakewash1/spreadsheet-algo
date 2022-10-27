@@ -3,11 +3,12 @@ import os, os.path as op, spreadsheet_algo_functions as saf, time
 # get name of folder from user input
 user_folder = input("Enter folder name: ")
 
-# get the current directory, and check if user folder exists in it. If not, exit program
+# check if user folder exists in the "put folder_here" directory. 
+# If not, exit program
 dir_path = op.join(os.getcwd(), "put_folder_here")
 top_dir_list = os.listdir(dir_path)
 
-if saf.find_dir(top_dir_list, user_folder):
+if saf.find_item_in_dir(top_dir_list, user_folder, False):
     # join user folder to current directory path
     dir_path = op.join(dir_path, user_folder)
 

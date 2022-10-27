@@ -1,12 +1,19 @@
 import os, os.path as op, xlsxwriter, time
 from tqdm import tqdm
 
-# for searching for a directory within a list of items. Returns false
-# if directory with desired name is not found
-def find_dir(dir, name):
-    for item in dir:
-        if not os.path.isfile(item) and item.casefold() == name.casefold():
+# for searching for a file or directory within a list of items. Returns false
+# if file or directory with desired name is not found
+# takes in list of directory contents, name of the search object, and is_file (a boolean)
+# if is_file is True, then search for a file. Otherwise, search for a directory
+def find_item_in_dir(dir_list, name, is_file):
+    # converts chars to lowercase and removes any spaces from name
+    name = name.casefold().replace(" ", "")
+    # iterates through list until match is found or end is reached
+    for item in dir_list:
+        if ((is_file and os.path.isfile(item)) or (not is_file and not os.path.isfile(item))
+                and item.casefold().replace(" ", "")) == name:
             return True
+    
     return False
 
 # takes in a dictionary where key = header name (folder name, week #, etc), and

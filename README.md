@@ -55,5 +55,5 @@ The following is a visual of how the spreadsheet should look:
 4) in File Explorer, go to the "spreadsheet-algo" folder 
 5) Click on address bar, type in "powershell," press Enter
 6) Type in "python auc_module_spreadsheet.py" Press Enter
-7) When prompted for the name of the webpage source, enter the name of the html you saved in step 3
+7) When prompted for the name of the webpage source, enter the name of the html you saved in step 3 (make sure you put the file type ".html" at the end)
 8) If code is successful, you can find the new spreadsheet in the "find_spreadsheet_here" folder
