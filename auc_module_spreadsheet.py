@@ -19,12 +19,15 @@ if proper_file != "nope":
         # weeks = soup.find_all("span", class_="name")["text"]
         # print(weeks)
 
-        # grab each week's content
+        # get each week's content
         top_div = soup.find("div", { "id" : "context_modules" })
         weeks = top_div.find_all('div', recursive=False)
         for week in weeks:
             print(week.find("span", class_="name").get_text())
-            # day = 
+            # get each day 
+            days_and_contents = week.find_all("li")
+            for item in days_and_contents:
+                print(item.find("span", {'class':['title', 'locked_title']})["title"])
 
 
 
