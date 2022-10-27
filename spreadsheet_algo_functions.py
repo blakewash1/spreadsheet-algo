@@ -1,20 +1,37 @@
 import os, os.path as op, xlsxwriter, time
 from tqdm import tqdm
 
-# for searching for a file or directory within a list of items. Returns false
-# if file or directory with desired name is not found
-# takes in list of directory contents, name of the search object, and is_file (a boolean)
-# if is_file is True, then search for a file. Otherwise, search for a directory
-def find_item_in_dir(dir_list, name, is_file):
+# for searching for a directory within a list of items. Returns True
+# if directory with desired name is found, False if otherwise
+def find_dir(dir_path, name):
+    # get list of items in directory
+    dir_list = os.listdir(dir_path)
     # converts chars to lowercase and removes any spaces from name
     name = name.casefold().replace(" ", "")
-    # iterates through list until match is found or end is reached
+    
     for item in dir_list:
-        if ((is_file and os.path.isfile(item)) or (not is_file and not os.path.isfile(item))
-                and item.casefold().replace(" ", "")) == name:
+        if (not os.path.isfile(op.join(dir_path, item)) and 
+            item.casefold().replace(" ", "") == name):
+            
             return True
     
     return False
+
+# for searching for a file within a list of items. Returns the proper name
+# of the file if it is found, otherwise returns "nope"
+def find_file(dir_path, name):
+    # get list of items in directory
+    dir_list = os.listdir(dir_path)
+    # converts chars to lowercase and removes any spaces from name
+    name = name.casefold().replace(" ", "")
+
+    for item in dir_list:
+        if (os.path.isfile(op.join(dir_path, item)) and 
+            item.casefold().replace(" ", "") == name):
+            
+            return item
+    
+    return "nope"
 
 # takes in a dictionary where key = header name (folder name, week #, etc), and
 # value = the list of contents. Iterates through the dictionary and prints to
@@ -22,7 +39,8 @@ def find_item_in_dir(dir_list, name, is_file):
 def create_spreadsheet(name, dict):
     # creating progress bar
     increment = 100 / len(dict)
-    progress_bar = tqdm(total=100, desc="Generating Spreadsheet", colour="green", ncols=150)
+    progress_bar = tqdm(total=100, desc="Generating Spreadsheet", 
+        colour="green", ncols=150)
 
     # create spreadsheet using xlsxwriter
     xlsx_path = op.join(os.getcwd(), "find_spreadsheet_here", name +'.xlsx')

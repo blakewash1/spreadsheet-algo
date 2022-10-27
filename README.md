@@ -44,8 +44,9 @@ The following is a visual of how the spreadsheet should look:
 
 ## Requirements
 * python version 3.7
-* pip install xlsxwriter
-* pip install tqdm
+* pip3 install xlsxwriter
+* pip3 install tqdm
+* pip3 install beautifulsoup4
 * this code only works with AUC courses webpage https://auc.instructure.com/courses/1380/modules
 
 ## Instructions

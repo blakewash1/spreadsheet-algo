@@ -7,9 +7,8 @@ user_folder = input("Enter folder name: ")
 # check if user folder exists in the "put folder_here" directory. 
 # If not, exit program
 dir_path = op.join(os.getcwd(), "put_folder_here")
-top_dir_list = os.listdir(dir_path)
 
-if saf.find_item_in_dir(top_dir_list, user_folder, False):
+if saf.find_dir(dir_path, user_folder):
     # join user folder to current directory path
     dir_path = op.join(dir_path, user_folder)
 
