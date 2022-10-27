@@ -8,7 +8,7 @@ def find_dir(dir_path, name):
     dir_list = os.listdir(dir_path)
     # converts chars to lowercase and removes any spaces from name
     name = name.casefold().replace(" ", "")
-    
+
     for item in dir_list:
         if (not os.path.isfile(op.join(dir_path, item)) and 
             item.casefold().replace(" ", "") == name):
@@ -33,10 +33,13 @@ def find_file(dir_path, name):
     
     return "nope"
 
-# takes in a dictionary where key = header name (folder name, week #, etc), and
+# takes in a dictionary where key = header name (folder name, day #, etc), and
 # value = the list of contents. Iterates through the dictionary and prints to
 # a new spreadsheet
-def create_spreadsheet(name, dict):
+# also takes in an optional argument "titles" which can be a list of section titles
+# If this is populated, each title will appear in larger, bold font at the top of each 
+# corresponding section
+def create_spreadsheet(name, dict, titles=[]):
     # creating progress bar
     increment = 100 / len(dict)
     progress_bar = tqdm(total=100, desc="Generating Spreadsheet", 

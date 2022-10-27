@@ -14,9 +14,17 @@ if proper_file != "nope":
     print("Webpage found.")
     time.sleep(1.5)
 
-    
+    with open(op.join(dir_path, proper_file)) as file:
+        soup = bs(file, "html.parser")
+        # weeks = soup.find_all("span", class_="name")["text"]
+        # print(weeks)
 
-   # with open()
+        # grab each week's content
+        top_div = soup.find("div", { "id" : "context_modules" })
+        weeks = top_div.find_all('div', recursive=False)
+        for week in weeks:
+            print(week.find("span", class_="name").get_text())
+            # day = 
 
 
 
