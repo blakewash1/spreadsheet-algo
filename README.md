@@ -18,7 +18,7 @@ The following is a visual of how the spreadsheet should look:
      ...    |      |             
  
 ## Requirements
-* python version 3.6
+* python version 3.7
 * pip install xlsxwriter
 * pip install tqdm
 * user's folder should exist inside of the "put_folder_here" directory
@@ -43,7 +43,7 @@ The following is a visual of how the spreadsheet should look:
      ...    |      |             
 
 ## Requirements
-* python version 3.6
+* python version 3.7
 * pip install xlsxwriter
 * pip install tqdm
 * this code only works with AUC courses webpage https://auc.instructure.com/courses/1380/modules

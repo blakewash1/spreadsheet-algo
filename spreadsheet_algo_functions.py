@@ -24,7 +24,7 @@ def create_spreadsheet(name, dict):
 
     # variable for keeping track of row num as we go down the spreadsheet
     row = 0
-    for header, content_list in dict:
+    for header, content_list in dict.items():
         # writing directory-name, date, and difficulty as section headers
         worksheet.write(row, 0, header, cell_format)
         worksheet.write(row, 1, "Date", cell_format)

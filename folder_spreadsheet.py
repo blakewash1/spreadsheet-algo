@@ -20,12 +20,21 @@ if saf.find_dir(top_dir_list, user_folder):
         print("Folder found.")
         time.sleep(1.5)
         
+        # create dictionary for create_spreadsheet() function
+        folder_dict = {}
         sub_dir_list.sort()
-        saf.create_spreadsheet(user_folder, dir_path, sub_dir_list)
+        for dir in sub_dir_list:
+            # getting the directory's contents
+            contents = os.listdir(op.join(dir_path, dir))
+            contents.sort()
+            # add folder-name/contents pair to dictionary
+            folder_dict[dir] = contents
 
-        for i in tqdm(range(10), desc ="Generating Spreadsheet"):
-            time.sleep(.1)
-        print("Spreadsheet created.")
+        saf.create_spreadsheet(user_folder, folder_dict)
+
+        # for i in tqdm(range(10), desc ="Generating Spreadsheet"):
+        #     time.sleep(.1)
+        # print("Spreadsheet created.")
     
     else:
         print("There are no sub-folders within selected folder. Exiting...")
