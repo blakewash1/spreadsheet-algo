@@ -38,6 +38,6 @@ else:
     print("Folder not found. Exiting...") 
 
 # add a short delay
-time.sleep(1.5)
+time.sleep(2)
 
 
