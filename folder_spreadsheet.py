@@ -38,6 +38,7 @@ if saf.find_dir(dir_path, user_folder):
             progress_bar.update(increment)
 
         progress_bar.close()
+        # create spreadsheet
         saf.create_spreadsheet(user_folder, folder_dict)
     
     else:

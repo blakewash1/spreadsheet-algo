@@ -78,9 +78,6 @@ if proper_file != "nope":
                         # first, add previous day (if any) and its materials to the dict
                         if (day):
                             sub_dict[day] = materials
-                            for key, values in sub_dict.items():
-                                print(key)
-                                print(values)
                         # then start new day w/ new materials
                         day = title
                         materials = []
@@ -91,15 +88,16 @@ if proper_file != "nope":
                 sub_dict[day] = materials
                 # if there is a desired week chosen by the user, create spreadsheet
                 if desired_week != 0:
-                    filename = proper_file.replace(".html", "") + "-" + week_text
-                    print(filename)
+                    filename = proper_file.replace(".html", "") + " - " + week_text
                     saf.create_spreadsheet(filename, sub_dict)
                 # otherwise, add completed sub_dict to module_dict
                 else:
                     module_dict[week_text] = sub_dict
-
-
-
+        
+        # if no desired week, create spreadsheet for all weeks
+        if desired_week == 0:
+            filename = proper_file.replace(".html", "") + " - All Weeks"
+            saf.create_2D_spreadsheet(filename, module_dict)
 
 
 else:

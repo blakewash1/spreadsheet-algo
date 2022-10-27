@@ -26,21 +26,24 @@ The following is a visual of how the spreadsheet should look:
 # AUC_Module_Spreadsheet
 ## Purpose
 
-The purpose of this script is to take in a webpage source (html) as input, list out each Week title as headers, then list out the 
-week's contents as rows beneath aforementioned headers. All of this should be displayed on a spreadsheet,
+The purpose of this script is to take in a webpage source (html) as input, list out each Week title, each day, then list out the 
+day's contents as rows beneath aforementioned days. All of this should be displayed on a spreadsheet,
 which is to be automatically downloaded at the end of the writing proccess.
 The following is a visual of how the spreadsheet should look:
 
-   WEEK_1   | DATE | UNDERSTANDING   
- ---------------------------------
-  CONTENT_1 |      |             
-  CONTENT_2 |      |            
-     ...    |      |             
-   WEEK_2   | DATE | UNDERSTANDING 
- ---------------------------------
-  CONTENT_1 |      |             
-  CONTENT_2 |      |            
-     ...    |      |             
+  WEEK_1                             WEEK_2 
+ -------------------------------------------------------------------
+   DAY_1   | DATE | UNDERSTANDING     DAY_1   | DATE | UNDERSTANDING
+ -------------------------------------------------------------------
+  CONTENT_1 |      |                CONTENT_1 |      |                
+  CONTENT_2 |      |                CONTENT_2 |      |            
+     ...    |      |                   ...    |      |              
+   DAY_2   | DATE | UNDERSTANDING     DAY_2   | DATE | UNDERSTANDING
+ --------------------------------------------------------------------
+  CONTENT_1 |      |                CONTENT_1 |      |            
+  CONTENT_2 |      |                CONTENT_2 |      |            
+     ...    |      |                   ...    |      |       
+ 
 
 ## Requirements
 * python version 3.7
