@@ -21,7 +21,7 @@ if proper_file != "nope":
         # grab each course section
         sections = soup.find_all('div', {'class':['col-sm-12', 'course-section']})
 
-        # 2D dictionary for containing weeks, days, and materials
+        # dictionary for containing header titles and content lists
         course_dict = {}
 
         for section in sections:
@@ -39,47 +39,6 @@ if proper_file != "nope":
         # create spreadsheet
         filename = proper_file.replace(".html", "")
         #saf.create_spreadsheet(filename, course_dict)
-
-        # for week in weeks:
-        #     week_text = (week.find("span", class_="name").get_text())
-        #     if desired_week == 0 or int(week_text[-1]) == desired_week:
-
-        #         # variables needed to create an entry to module_dict
-        #         sub_dict = {}
-        #         day = ""
-        #         materials = []
-
-        #         # get each day and its materials
-        #         days_and_materials = week.find_all("li")
-        #         for item in days_and_materials:
-        #             # this could either be a day or course material. If a day, make this the key of the dict
-        #             # otherwise, add it to the materials list, which will be the value of the dict
-        #             title = item.find("span", {'class':['title', 'locked_title']})["title"]
-        #             if title.casefold().startswith("day"):
-        #                 # first, add previous day (if any) and its materials to the dict
-        #                 if (day):
-        #                     sub_dict[day] = materials
-        #                 # then start new day w/ new materials
-        #                 day = title
-        #                 materials = []
-        #             else:
-        #                 materials.append(title)
-
-        #         # add final day of week to sub_dict
-        #         sub_dict[day] = materials
-        #         # if there is a desired week chosen by the user, create spreadsheet
-        #         if desired_week != 0:
-        #             filename = proper_file.replace(".html", "") + " - " + week_text
-        #             saf.create_spreadsheet(filename, sub_dict)
-        #         # otherwise, add completed sub_dict to module_dict
-        #         else:
-        #             module_dict[week_text] = sub_dict
-        
-        # # if no desired week, create spreadsheet for all weeks
-        # if desired_week == 0:
-        #     filename = proper_file.replace(".html", "") + " - All Weeks"
-        #     saf.create_2D_spreadsheet(filename, module_dict)
-
 
 else:
     print("Webpage not found. Exiting...") 
