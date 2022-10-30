@@ -25,13 +25,20 @@ if proper_file != "nope":
         course_dict = {}
 
         for section in sections:
-            title = section.find("div", class_="section-title",recursive=False).get_text()
-            # print(title)
+            section_title = section.find("div", class_="section-title",recursive=False).get_text()
+            section_title = section_title.replace("\n", "")
+            #print(section_title)
             # grab list of contents in section
             section_list = section.find("ul", class_="section-list").find_all("li")
             for listing in section_list:
                 listing_name = listing.find("span", class_="lecture-name").get_text()
+                listing_name = listing_name.replace("\n", "")
                 print(listing_name)
+                course_dict[section_title] = listing_name
+        
+        # create spreadsheet
+        filename = proper_file.replace(".html", "")
+        #saf.create_spreadsheet(filename, course_dict)
 
         # for week in weeks:
         #     week_text = (week.find("span", class_="name").get_text())
