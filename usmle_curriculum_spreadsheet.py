@@ -26,19 +26,23 @@ if proper_file != "nope":
 
         for section in sections:
             section_title = section.find("div", class_="section-title",recursive=False).get_text()
-            section_title = section_title.replace("\n", "")
-            #print(section_title)
+            # trim title down to only the name
+            section_title = section_title.split('\n')[6].strip()
+            # variable for keeping track of contents in this section
+            section_list_names = []
             # grab list of contents in section
             section_list = section.find("ul", class_="section-list").find_all("li")
             for listing in section_list:
                 listing_name = listing.find("span", class_="lecture-name").get_text()
-                listing_name = listing_name.replace("\n", "")
-                print(listing_name)
-                course_dict[section_title] = listing_name
+                # trim listing down to only the name
+                listing_name = listing_name.split('\n')[1].strip()
+                section_list_names.append(listing_name)
+
+            course_dict[section_title] = section_list_names
         
         # create spreadsheet
         filename = proper_file.replace(".html", "")
-        #saf.create_spreadsheet(filename, course_dict)
+        saf.create_spreadsheet(filename, course_dict)
 
 else:
     print("Webpage not found. Exiting...") 
