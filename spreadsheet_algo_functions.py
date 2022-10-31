@@ -50,28 +50,31 @@ def create_spreadsheet(name, dict):
     worksheet = workbook.add_worksheet()
     cell_format = workbook.add_format({'bold': True, 'bg_color': '#FAFAD2'})
 
-    # widen the length of the first and third column
-    worksheet.set_column(0, 0, 60)
-    worksheet.set_column(2, 2, 30)
-
-    # variable for keeping track of row num as we go down the spreadsheet
-    row = 0
+    # variable for keeping track of col num as we go down the spreadsheet
+    col = 0
     for header, content_list in dict.items():
+        # variable for keeping track of row throughout this section
+        row = 0
+
+        # widen the length of the first and third column of the section
+        worksheet.set_column(col, col, 60)
+        worksheet.set_column(col+2, col+2, 30)
+
         # writing directory-name, date, and difficulty as section headers
-        worksheet.write(row, 0, header, cell_format)
-        worksheet.write(row, 1, "Date", cell_format)
-        worksheet.write(row, 2, "Understanding", cell_format)
+        worksheet.write(row, col, header, cell_format)
+        worksheet.write(row, col+1, "Date", cell_format)
+        worksheet.write(row, col+2, "Understanding", cell_format)
 
         # writing contents to the sheet
         for content in content_list:
             row += 1
-            worksheet.write(row, 0, content)
+            worksheet.write(row, col, content)
             # updating the progress bar
             time.sleep(0.025)
             progress_bar.update(increment / len(content_list))
 
-        # iterating the row number by 2 to create space for the next section
-        row += 2
+        # iterating the column number by 4 to create space for the next week
+        col += 4
            
     progress_bar.close()
     print("Spreadsheet created. Saved to 'find_spreadsheet_here' directory.")
